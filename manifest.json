@@ -1,0 +1,26 @@
+{
+    "manifest_version": 2,
+    "name": "扇贝助手",
+    "description": "统计学习中点击不认识的单词，及该单词点击不认识的次数。",
+    "version": "0.1",
+	"background":
+	{
+		"page": "background.html"
+	},
+    "permissions":[
+        "storage",
+        "https://*.shanbay.com/*"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": 
+	[
+		{
+			"matches": ["http://*.shanbay.com/*","https://*.shanbay.com/*"],
+			"js": ["js/content-script.js"],
+
+			"run_at": "document_start"
+		}
+	]
+}

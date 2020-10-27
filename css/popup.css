@@ -1,0 +1,28 @@
+body, h2{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    width: 10em;
+    padding: 1em;
+}
+
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 6px;
+    text-align: center;
+}
+
+a{
+    color: black;
+    font-weight: 400;
+    text-decoration: none;
+}
