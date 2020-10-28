@@ -56,8 +56,9 @@ function renderTable(date){
             table.html("<p>当前日期没有学习记录</p>");
             return;
         }
+        let i = 1;
         for (let k of Object.keys(data[date])){
-            let row = '<tr><td>'+ k +'</td><td>'+data[date][k]+'</td><td>'+ data.allList[k] +'</td></tr>';
+            let row = '<tr>'+'<td>'+ (i++) +'</td>'+'<td>'+ k +'</td><td>'+data[date][k]+'</td><td>'+ data.allList[k] +'</td></tr>';
             table.append(row)
         }
     }, 200);
