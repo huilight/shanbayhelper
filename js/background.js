@@ -42,28 +42,37 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
 	sendResponse(JSON.stringify(request));
 });
 
-document.onload = renderTable(today);
 
+function renderTable(date, sortByCol=null){
+    var data = getDataByDate(date);
+    var words = [];
 
-function renderTable(date){
-    data = getDataByDate(date);
-
-    table = $("#wrongWordList");
-
+    var table = $("#wrongWordList");
+    table.html('<tr><th>序号</th><th data-sort=0 class="sort">单词</th><th data-sort=1 class="sort">今日错误次数</th><th data-sort=2 class="sort">总错误次数</th></tr>');
     setTimeout(function(){
         console.log(data[date]);
         if (Object.keys(data[date]).length === 0){
             table.html("<p>当前日期没有学习记录</p>");
             return;
         }
-        let i = 1;
         for (let k of Object.keys(data[date])){
-            let row = '<tr>'+'<td>'+ (i++) +'</td>'+'<td>'+ k +'</td><td>'+data[date][k]+'</td><td>'+ data.allList[k] +'</td></tr>';
+            words.push([k, data[date][k], data.allList[k]])
+        }
+
+        if (sortByCol !== null && sortByCol !== 0){
+            words.sort(function(value1, value2){
+                return value2[sortByCol] - value1[sortByCol];
+            })
+        }
+        console.log(words)
+        for(let i in words){
+            let row = '<tr>'+'<td>'+ (parseInt(i)+1) +'</td>'+'<td>'+ words[i][0] +'</td><td>'+words[i][1]+'</td><td>'+ words[i][2] +'</td></tr>';
             table.append(row)
         }
     }, 200);
 }
 
+document.onload = renderTable(today);
 function getDataByDate(date){
     // 按日期获取单词列表
     let temp = {};
@@ -76,3 +85,6 @@ function getDataByDate(date){
     });
     return temp;
 }
+
+
+$(document).on('click', '.sort', function (){renderTable(today, $(this).data('sort'))});

@@ -15,3 +15,6 @@ th, td{
     margin: 0 auto;
     width: 800px;
 }
+.sort{
+    cursor: pointer;
+}
