@@ -9,7 +9,7 @@
 	},
     "permissions":[
         "storage",
-        "https://*.shanbay.com/*"
+        "https://*/*"
     ],
     "browser_action": {
         "default_popup": "popup.html"
@@ -17,8 +17,8 @@
     "content_scripts": 
 	[
 		{
-			"matches": ["http://*.shanbay.com/*","https://*.shanbay.com/*"],
-			"js": ["js/content-script.js"],
+			"matches": ["http://*/*","https://*/*"],
+			"js": ["js/jquery.min.js", "js/content-script.js"],
 
 			"run_at": "document_start"
 		}
